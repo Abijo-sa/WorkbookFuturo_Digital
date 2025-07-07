@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Futuro Digital - Workbook</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      background: #fdfdfd;
+      color: #333;
+    }
+    header {
+      background-color: #111;
+      color: white;
+      padding: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    .logo {
+      font-weight: bold;
+    }
+    .hamburger {
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .nav-items {
+      display: none;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 0;
+      width: 100%;
+      background: #222;
+      z-index: 999;
+      padding: 1rem;
+    }
+    .nav-items a {
+      color: yellow;
+      text-decoration: none;
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+    }
+    .nav-items.show {
+      display: flex;
+    }
+    main {
+      padding: 5rem 1rem 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    section {
+      margin-bottom: 4rem;
+    }
+    h1, h2 {
+      color: #000;
+    }
+    .btn {
+      padding: 1rem 2rem;
+      background: #ffc107;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+      border-radius: 8px;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    li {
+      margin-bottom: 0.5rem;
+    }
+    @media (min-width: 768px) {
+      .nav-items {
+        display: flex !important;
+        position: static;
+        flex-direction: row;
+        background: transparent;
+        padding: 0;
+      }
+      .nav-items a {
+        margin: 0 1rem;
+      }
+      .hamburger {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">🚀 Futuro Digital</div>
+  <button class="hamburger" onclick="toggleMenu()">☰</button>
+  <nav id="menu" class="nav-items">
+    <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+    <a href="#beneficios" onclick="toggleMenu()">Beneficios</a>
+    <a href="#descarga" onclick="toggleMenu()">Descargar</a>
+  </nav>
+</header>
+
+<main>
+  <section id="inicio">
+    <h1>Bienvenido al Workbook</h1>
+    <p>Este workbook es tu primer paso hacia una carrera como desarrollador FullStack.</p>
+    <button class="btn" onclick="scrollToSection('beneficios')">Comenzar mi transformación</button>
+  </section>
+
+  <section id="beneficios">
+    <h2>🎯 Beneficios al inscribirte</h2>
+    <ul>
+      <li>✅ Acceso prioritario al programa</li>
+      <li>✅ Talleres de inglés con nativos</li>
+      <li>✅ Comunidad VIP</li>
+      <li>✅ Bonus secretos en la sesión 3</li>
+    </ul>
+  </section>
+
+  <section id="descarga">
+    <h2>📥 Descargar tu workbook</h2>
+    <p>Haz clic en el botón para guardar tus beneficios en PDF.</p>
+    <button class="btn" onclick="generarYDescargarPDF()">📥 Descargar PDF</button>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+function toggleMenu() {
+  var menu = document.getElementById("menu");
+  if (window.innerWidth < 768) {
+    menu.classList.toggle("show");
+  }
+}
+function scrollToSection(id) {
+  var el = document.getElementById(id);
+  if (el) {
+    var y = el.getBoundingClientRect().top + window.scrollY - 60;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}
+function generarYDescargarPDF() {
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF();
+  doc.setFontSize(14);
+  doc.text("🚀 Futuro Digital - Beneficios", 20, 20);
+  doc.text("✅ Acceso prioritario al programa", 20, 40);
+  doc.text("✅ Talleres de inglés con nativos", 20, 50);
+  doc.text("✅ Comunidad VIP", 20, 60);
+  doc.text("✅ Bonus secretos en la sesión 3", 20, 70);
+  doc.save("futuro_digital_workbook.pdf");
+}
+</script>
+
+</body>
+</html>
